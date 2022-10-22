@@ -14,3 +14,6 @@ A 100% Python Obfuscator that uses bytecode!
 - All the packages that are needed are already pre-installed in python.
 - Its zlib, base64, codecs, random, os
 
+## Obfuscated Code
+![alt text](https://raw.githubusercontent.com/comradebypass/Comfuscate/main/how%20it%20looks.png)
+
