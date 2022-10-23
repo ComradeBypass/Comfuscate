@@ -17,3 +17,7 @@ A 100% Python Obfuscator that uses bytecode!
 ## Obfuscated Code
 ![alt text](https://raw.githubusercontent.com/comradebypass/Comfuscate/main/how%20it%20looks.png)
 
+## Operating Systems
+- Windows
+- (Not tested on linux)
+
