@@ -7,7 +7,7 @@ def setup():
     global imports
     global prepped
 
-    file_to_obfuscate = input("File you want to obfuscate (needs to be in the same folder as the obfuscator): ")
+    file_to_obfuscate = input("[Comfuscate] File you want to obfuscate (needs to be in the same folder as the obfuscator): ")
     file_to_obfuscatestr = str(file_to_obfuscate)
 
     curdirectory = os.path.dirname(os.path.abspath(__file__))
@@ -60,278 +60,7 @@ def setup():
 #                                 Long may our Crimson Flag Inspire,                        
 #                                 Shining in Glory for all Men to see.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import zlib
-import codecs
-import base64
+import zlib,codecs,base64
 """
 
     prepped = str(a.strip())
@@ -339,8 +68,28 @@ import base64
 setup()
 
 
-def obfuscation(file):
-    bruh = codecs.encode(file)
+def obfuscation(contents: str) -> None:
+    print("[Comfuscate] Starting obfuscation...")
+    b64_content = base64.b64encode(contents.encode()).decode()
+
+    VARIABLE_NAME = '__STAND_WITH_STALIN' * 100
+    index = 0
+    code = f'{VARIABLE_NAME} = ""\n'
+    for _ in range(int(len(b64_content) / 10) + 1):
+        _str = ''
+        for char in b64_content[index:index + 10]:
+            byte = str(hex(ord(char)))[2:]
+            if len(byte) < 2:
+                byte = '0' + byte
+            _str += '\\x' + str(byte)
+        code += f'{VARIABLE_NAME} += "{_str}"\n'
+        index += 10
+    code += f'exec(__import__("\\x62\\x61\\x73\\x65\\x36\\x34").b64decode({VARIABLE_NAME}.encode("\\x75\\x74\\x66\\x2d\\x38")).decode("\\x75\\x74\\x66\\x2d\\x38"))'
+    open(curdirectory+"\\"+"Obfuscated_"+file_to_obfuscatestr,'w+').write(code)
+    print("[Comfuscate] Layer 1 done!")
+
+
+    bruh = codecs.encode(contents)
     a = base64.b64encode(bruh)
     b = codecs.decode(a)
     c = r"exec(codecs.decode(base64.b64decode(r'"+b+"')))"
@@ -359,6 +108,7 @@ def obfuscation(file):
     i = base64.b85encode(bruh)
     j = codecs.decode(i)
     k = r"exec(codecs.decode(base64.b85decode(r'"+j+"')))"
+    print("[Comfuscate] Layer 2 done!")
 
 ############################################################################ LOOPS
 
@@ -428,7 +178,8 @@ def obfuscation(file):
 
 
     W = imports+c
-
+    print("[Comfuscate] LOOPS done!")
+    
     try:
         creationoffile = open(curdirectory+"\\"+"Obfuscated_"+file_to_obfuscatestr, "x")
         creationoffile.close()
@@ -438,9 +189,6 @@ def obfuscation(file):
     creationoffile = open(curdirectory+"\\"+"Obfuscated_"+file_to_obfuscatestr, "w")
     creationoffile.write(W)
     creationoffile.close()
+    print("[Comfuscate] Comfuscate is done!")
 
 obfuscation(prepped)
-
-
-
-
